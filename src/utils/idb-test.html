@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>IndexedDB Test</title>
+  </head>
+  <body>
+    <h1>IndexedDB Test Page</h1>
+    <button id="testButton">Run IndexedDB Test</button>
+    <div id="output"></div>
+
+    <script src="idb.js"></script>
+    <script>
+      // JavaScript code for testing your idb functionality
+      document
+        .getElementById("testButton")
+        .addEventListener("click", async () => {
+          try {
+            // Open your IndexedDB and perform operations here
+            const db = await openCostsDB("costsdb", 1);
+
+            // Example: Add a cost
+            const newCost = {
+              sum: 100,
+              category: "Test",
+              description: "Testing IndexedDB"
+            };
+            const result = await addCost(db, newCost);
+
+            // Display the result
+            document.getElementById(
+              "output"
+            ).textContent = `Added cost with ID: ${result}`;
+
+            // You can add more idb operations and tests here
+          } catch (error) {
+            console.error("Error:", error);
+            document.getElementById(
+              "output"
+            ).textContent = `Error: ${error.message}`;
+          }
+        });
+    </script>
+  </body>
+</html>
